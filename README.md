@@ -1,5 +1,5 @@
 # LongReadQC
-A quality control tool for long reads.
+LongReadQC is a quality control tool for long reads. LongReadQC is written in C. 
 
 LongReadQC currently has two functions: 
 1) QC for fastq file. LongReadQC will generate a text file showing basic information of the input reads. 
@@ -34,3 +34,4 @@ For example,
 longreadqc filterfq -i input.fastq -p ./output_prefix 
 longreadqc filterfq -l input.fastqs.list -p ./output_prefix -n 10 
 ```
+
