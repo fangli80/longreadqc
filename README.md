@@ -1,7 +1,9 @@
 # LongReadQC
 LongReadQC is a quality control tool for long reads. LongReadQC is written in C. 
 
+## Usage
 LongReadQC currently has two functions: 
+
 1) QC for fastq file. LongReadQC will generate a text file showing basic information of the input reads. 
 
 ```         
@@ -19,6 +21,7 @@ longreadqc fq -l SampleName.fastqs.list -d ./SampleName_longreadqc_out/ -p sampl
 ```  
 
 2) Filtering reads. LongReadQC will remove reads that are illegal, for example, reads that have different length in base and quality. Users can also set min_read_length and max_read_length to get the reads in the intended length. 
+
 ```
 Usage:   longreadqc filterfq [options]  
 Options:
@@ -34,4 +37,15 @@ For example,
 longreadqc filterfq -i input.fastq -p ./output_prefix 
 longreadqc filterfq -l input.fastqs.list -p ./output_prefix -n 10 
 ```
+
+## Installation
+
+```
+git clone https://github.com/fangli08/longreadqc.git
+cd longreadqc/
+sh build.sh
+```
+
+You can copy the `longreadqc` binary file to the folder in your PATH.
+
 
