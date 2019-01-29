@@ -63,7 +63,6 @@ static inline int is_bad_fastq (char **lines, int32_t min_read_len, int32_t max_
 
 static int filter1fastq(char * input_file, int num_split_file, FILE ** out_file_fps, int32_t min_read_len, int32_t max_read_len)
 {
-    FILE * input_fp;
     char * read_seq;
     char ** lines;
     int32_t read_len;
@@ -74,6 +73,7 @@ static int filter1fastq(char * input_file, int num_split_file, FILE ** out_file_
     int k;
     int num_skipped_reads;
     int num_good_reads;
+	gzFile input_fp;
     
     lines = (char **) calloc (4, sizeof(char *));
     for (int i = 0; i < 4; i++)
@@ -81,8 +81,8 @@ static int filter1fastq(char * input_file, int num_split_file, FILE ** out_file_
         lines[i] = (char *) calloc(MAX_READ_LENGTH, sizeof(char));
     }
 
-    input_fp = fopen(input_file, "r");
-    if(input_fp == NULL) {
+    input_fp = gzopen(input_file, "r");
+    if(! input_fp) {
         fprintf(stderr, "ERROR! Failed to open file for reading: %s", input_file);
         exit(1);
     }
@@ -91,11 +91,11 @@ static int filter1fastq(char * input_file, int num_split_file, FILE ** out_file_
     k = 0;
     num_skipped_reads = 0;
     num_good_reads = 0;
-    while ( fgets(lines[k], MAX_READ_LENGTH, input_fp) != NULL )
+    while ( gzgets(input_fp, lines[k], MAX_READ_LENGTH) != NULL )
     {
         ret = 1;
         for (int i = k+1; i < 4; i++) {
-            if (fgets(lines[i], MAX_READ_LENGTH, input_fp) == NULL) { ret = 0; }
+            if (gzgets(input_fp, lines[i], MAX_READ_LENGTH) == NULL) { ret = 0; }
         }
         if (ret == 0) { break; }
         error_code = is_bad_fastq(lines, min_read_len, max_read_len);
@@ -133,7 +133,7 @@ static int filter1fastq(char * input_file, int num_split_file, FILE ** out_file_
     fprintf(stderr, "number of clean reads: %d\n", num_good_reads);
     fprintf(stderr, "number of filtered reads: %d\n", num_skipped_reads);
 
-    fclose(input_fp);
+    gzclose(input_fp);
     
     for (int i = 0; i < 4; i++) {
         free(lines[i]);
