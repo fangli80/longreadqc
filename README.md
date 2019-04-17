@@ -1,5 +1,6 @@
 # LongReadQC
 LongReadQC is a quality control tool for long reads. LongReadQC is written in C. 
+LongReadQC is in development
 
 ## Usage
 LongReadQC currently has two functions: 
