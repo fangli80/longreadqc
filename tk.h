@@ -3,6 +3,7 @@
 
 #define MAX_READ_LENGTH 10485760
 #define MAX_PATH_LENGTH 10240
+#define MAX_PAF_LENGTH 10485760
 
 typedef struct {
 	char ** data_list;
