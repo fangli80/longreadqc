@@ -227,7 +227,7 @@ int main_qcfq(int argc, char * argv[])
         qc_usage();
         exit(1);
     }
-    if (out_dir == NULL) { 
+    if (out_dir[0] == 0) { 
         sprintf(out_dir, "./longreadqc_out/");
     }
     if (out_prefix == NULL) {
