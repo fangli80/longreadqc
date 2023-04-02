@@ -1,9 +1,11 @@
-CC = gcc
-CFLAGS = -g -O0 -std=c99
+CXX = g++
+CXXFLAGS = -g -Og -std=c++11
 LIBS = -lz
 
-longreadqc: longreadqc.c filter_fq.c qc_bam.c qc_fq.c qc_fa.c tk.c
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+all: longreadqc
+
+longreadqc: longreadqc.cpp filter_fq.cpp  qc_bam.cpp  qc_fq.cpp qc_fa.cpp qc_paf.cpp tk.cpp
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LIBS)
 
 clean:
 	rm -f longreadqc
