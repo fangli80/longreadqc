@@ -44,7 +44,7 @@ longreadqc filterfq -l input.fastqs.list -p ./output_prefix -n 10
 ```
 git clone https://github.com/fangli08/longreadqc.git
 cd longreadqc/
-sh build.sh
+make
 ```
 
 You can copy the `longreadqc` binary file to the folder in your PATH.
